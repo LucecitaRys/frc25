@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.Drive.DriveControlMode;
 import frc.robot.auto.IAuto;
 import frc.robot.commands.ShootCommand;
 //import frc.robot.subsystems.Climber;
@@ -93,6 +94,7 @@ public class Robot extends TimedRobot {
     if (ControlBoard.driver.getPOV() != -1) { 
       mDrive.setHeadingControl(Rotation2d.fromDegrees(ControlBoard.driver.getPOV())); 
     } 
+   
 
     //Operator
     if (ControlBoard.operator.getAButtonPressed()) {
@@ -103,19 +105,7 @@ public class Robot extends TimedRobot {
       //mIntake.setControlState(IntakeControlState.VariableVelocity);
     }
 
-    if (ControlBoard.operator.getRightBumperPressed()) {
-      //mShooter.setConstantVel(70);
-      //mShooter.setShooterControlState(ShooterControlState.ConstantVelocity); 
-    } else if (ControlBoard.operator.getRightBumperReleased()) {
-      //mShooter.setShooterControlState(ShooterControlState.VariableVelocity);
-    }
-
-    if (ControlBoard.operator.getLeftBumperPressed()) {
-      //mShooter.setConstantVel(10);
-      //mShooter.setShooterControlState(ShooterControlState.ConstantVelocity); 
-    } else if (ControlBoard.operator.getLeftBumperReleased()) {
-      //mShooter.setShooterControlState(ShooterControlState.VariableVelocity); 
-    }
+   
 
     if (ControlBoard.driver.getYButtonPressed()) {
       ///mClimber.setTargetPosition(70); 

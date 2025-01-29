@@ -11,6 +11,7 @@ public class ControlBoard {
 
     public static DoubleSupplier getLeftYC0 () {
         return () -> MathUtil.applyDeadband(-driver.getLeftY(), 0.2); 
+       
     }
 
     public static DoubleSupplier getLeftXC0 () {
@@ -21,11 +22,18 @@ public class ControlBoard {
         return () -> MathUtil.applyDeadband(-driver.getRightX(), 0.2); 
     }
 
-    public static DoubleSupplier getRightYC1 () {
-        return () -> MathUtil.applyDeadband(-operator.getRightY(), 0.2); 
+    public static double getLeftY_0 (){
+        return MathUtil.applyDeadband(-operator.getLeftY(), 0.2); 
     }
-
-    public static DoubleSupplier getLeftYC1 () {
-        return () -> MathUtil.applyDeadband(-operator.getLeftY(), 0.2); 
+    public static double getRightY_0 (){
+        return MathUtil.applyDeadband(-operator.getRightY(), 0.2); 
     }
+    public static boolean buttonA (){
+        return operator.getAButton(); 
+    }
+    public static boolean buttonB(){
+        return operator.getBButton(); 
+    }
+    
+    
 }

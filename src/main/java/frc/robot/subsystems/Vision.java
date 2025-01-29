@@ -1,6 +1,6 @@
-/* package frc.robot.subsystems;
+package frc.robot.subsystems;
 
-import org.opencv.imgproc.Subdiv2D;
+
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -16,14 +16,14 @@ table = NetworkTableInstance.getDefault().getTable(getName());
     }
     @Override
     public void periodic (){
-        double valor1 = 10;
-        table.getEntry("valor").setDouble(valor1); 
+      //  double valor1 = 10;
+       // table.getEntry("valor").setDouble(valor1); 
     }
     public void salida(double x, double y, double area){
-    NetworkTable table2 = NetworkTableInstance.getDefault().getTable("limelight");
-NetworkTableEntry tx = table2.getEntry("tx");
-NetworkTableEntry ty = table2.getEntry("ty");
-NetworkTableEntry ta = table2.getEntry("ta");
+    NetworkTable table1 = NetworkTableInstance.getDefault().getTable("limelight");
+NetworkTableEntry tx = table1.getEntry("tx");
+NetworkTableEntry ty = table1.getEntry("ty");
+NetworkTableEntry ta = table1.getEntry("ta");
 
  x = tx.getDouble(0.0);
  y = ty.getDouble(0.0);
@@ -45,4 +45,3 @@ public static Vision getInstance (){
 
 
 }
-*/

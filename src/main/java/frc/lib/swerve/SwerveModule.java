@@ -3,7 +3,7 @@ package frc.lib.swerve;
 import static edu.wpi.first.units.Units.Degrees;
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.StatusSignal;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.ClosedLoopGeneralConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -16,7 +16,7 @@ import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
-// import com.ctre.phoenix6.signals.AbsoluteSensorDiscontinuityPoint;
+
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
@@ -39,12 +39,14 @@ public class SwerveModule {
     
     private PeriodicIO mPeriodicIO = new PeriodicIO(); 
     private ModuleState targetModuleState; 
+    
 
     public SwerveModule (SwerveModuleConstants moduleConstants, int moduleNumber){ 
         this.moduleNumber = moduleNumber; 
         mSteerMotor = new TalonFX(moduleConstants.steerMotorID); 
         mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
         mCANcoder = new CANcoder(moduleConstants.cancoderID); 
+        
         //SteerMotor Config
         ClosedLoopGeneralConfigs closedLoopConfigs = new ClosedLoopGeneralConfigs(); 
         closedLoopConfigs.ContinuousWrap = true; 
@@ -103,24 +105,35 @@ public class SwerveModule {
         mPeriodicIO.currentAngle = absPos.getValueAsDouble();
         mPeriodicIO.velocity = velocity.getValueAsDouble() * SwerveModules.wheelCircumference; 
         mPeriodicIO.drivePosition = position.getValue().in(Degrees); 
-        SmartDashboard.putNumber("absPos", absPos.getValueAsDouble()); 
+       SmartDashboard.putNumber("absPos", absPos.getValue().in(Degrees)); 
         SmartDashboard.putNumber("velocity", velocity.getValueAsDouble()); 
         SmartDashboard.putNumber("position", position.getValueAsDouble()); 
         
     }
 
+   
     public void writePeriodicOutputs (){
         if (targetModuleState == null) {
             return;
         }
-        SwerveModuleState moduleStateOptimized = SwerveModuleState.optimize(
+      
+       SwerveModuleState moduleStateOptimized = SwerveModuleState.optimize(
             new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle), 
             Rotation2d.fromRotations(mPeriodicIO.currentAngle)
-        ); 
+        );
+
+        //SwerveModuleState moduleStateOptimized = new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle);
+        //Rotation2d.fromRotations(mPeriodicIO.currentAngle);
+
+      //  SwerveModuleState moduleStateOptimized =  new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle), Rotation2d.fromRotations(mPeriodicIO.currentAngle);
+        
+
+     
         double targetVelocity = moduleStateOptimized.speedMetersPerSecond; 
         Rotation2d targetAngleRot = moduleStateOptimized.angle; 
         mPeriodicIO.rotationDemand = targetAngleRot.getRotations(); 
         mSteerMotor.setControl(new PositionDutyCycle(mPeriodicIO.rotationDemand)); 
+        
         if (mPeriodicIO.controlMode == DriveControlMode.Velocity){
             mPeriodicIO.driveDemand = Conversions.MPSToRPS(targetVelocity, SwerveModules.wheelCircumference, SwerveModules.drive_gear_ratio)*60; 
             mDriveMotor.setControl(new VelocityDutyCycle(mPeriodicIO.driveDemand)); 

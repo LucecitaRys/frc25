@@ -1,12 +1,13 @@
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.Degrees;
+ 
 
-import com.ctre.phoenix6.BaseStatusSignal;
+
 import com.ctre.phoenix6.CANBus;
-import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.CANBus.CANBusStatus;
+
+
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -14,6 +15,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Twist2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.measure.Angle;
@@ -36,7 +38,7 @@ import frc.robot.Constants.Drive.KinematicLimits;
 public class Drive extends SubsystemBase {
   private static Drive mDrive;
   private SwerveModule[] mSwerveModules;
-  private Pigeon2 mPigeon = new Pigeon2(Constants.Drive.id_pigeon, "canivore"); 
+  private Pigeon2 mPigeon = new Pigeon2(Constants.Drive.id_pigeon) ; 
 
   private PeriodicIO mPeriodicIO = new PeriodicIO(); 
   public enum DriveControlState {
@@ -47,17 +49,19 @@ public class Drive extends SubsystemBase {
     ForceOrient,
     None
   }
+
+
   private DriveControlState mControlState = DriveControlState.None;
   private KinematicLimits mKinematicLimits = Constants.Drive.oneMPSLimits; 
   private SwerveDriveKinematics mSwerveKinematics = new SwerveDriveKinematics(
     //Front Left
-    new Translation2d(Constants.Drive.wheel_base / 2.0, Constants.Drive.track_width / 2.0),    //- +
+   new Translation2d(-Constants.Drive.wheel_base / 2.0, Constants.Drive.track_width / 2.0),    //- +
     //Front Right
-    new Translation2d(Constants.Drive.wheel_base / 2.0, Constants.Drive.track_width / 2.0),  //+ -
+    new Translation2d(Constants.Drive.wheel_base / 2.0, -Constants.Drive.track_width / 2.0),  //+ -
     //Back Left 
     new Translation2d(Constants.Drive.wheel_base / 2.0, Constants.Drive.track_width / 2.0),    // ++
     //Back Right 
-    new Translation2d(Constants.Drive.wheel_base / 2.0, Constants.Drive.track_width / 2.0)  //- -
+    new Translation2d(-Constants.Drive.wheel_base / 2.0, -Constants.Drive.track_width / 2.0)  //- -
   ); 
   private SwerveDriveOdometry mOdometry; 
   private DriveMotionPlanner mMotionPlanner; 
@@ -71,6 +75,7 @@ public class Drive extends SubsystemBase {
       new SwerveModule(SwerveModules.MOD2, 2),
       new SwerveModule(SwerveModules.MOD3, 3)
     };
+
     mPigeon.reset(); 
     mOdometry = new SwerveDriveOdometry(mSwerveKinematics, getModulesStates()); 
     mMotionPlanner = new DriveMotionPlanner(); 
@@ -80,6 +85,9 @@ public class Drive extends SubsystemBase {
       swerveModule.outputTelemetry(); 
     }
     outputTelemetry();
+
+    
+
   }
 
   public static Drive getInstance () {
@@ -113,19 +121,20 @@ public class Drive extends SubsystemBase {
     Rotation2d heading_setpoint = new Rotation2d(); 
   }
 
+  public double GetH(){
+    return mPigeon.getRotation2d().getRadians();
+  }
   public void readPeriodicInputs () {
     mPeriodicIO.timestamp = Timer.getFPGATimestamp();
 
-    StatusSignal<Angle> yawSignal = mPigeon.getYaw();  // revisar agregando var y getValue Double 
-   yawSignal.refresh();
-mPeriodicIO.yawAngle = Rotation2d.fromDegrees(yawSignal.getValue().in(Degrees));
+   //StatusSignal<Angle> yawSignal = mPigeon.getRotation2d().getDegrees(); // revisar agregando var y getValue Double 
+   // yawSignal.refresh();
+
+   mPeriodicIO.yawAngle = Rotation2d.fromRadians(GetH());
 
 
-/*var yawAngle = mPigeon.getYaw(); 
-yawAngle.refresh();
-mPeriodicIO.yawAngle = Rotation2d.fromDegrees(yawAngle.getValueAsDouble()); */
+// SmartDashboard.putNumber("Yaw", mPigeon.getRotation2d().getDegrees());
 
-SmartDashboard.putNumber("Yaw", yawSignal.getValueAsDouble()); 
 
 
     for (SwerveModule module : mSwerveModules) {
@@ -134,7 +143,7 @@ SmartDashboard.putNumber("Yaw", yawSignal.getValueAsDouble());
     mPeriodicIO.meas_module_states = getModulesStates(); 
     mPeriodicIO.meas_chassis_speeds = mSwerveKinematics.toChassisSpeeds(mPeriodicIO.meas_module_states); 
     mPeriodicIO.robot_pose = mOdometry.update(mPeriodicIO.yawAngle, mPeriodicIO.meas_module_states); 
-    SmartDashboard.putNumber("CAN", CANBus.getStatus("rio").BusUtilization); 
+   // SmartDashboard.putNumber("CAN", CANBus.getStatus("rio").BusUtilization); 
   }
 
   public void writePeriodicOutputs () {
@@ -170,6 +179,7 @@ SmartDashboard.putNumber("Yaw", yawSignal.getValueAsDouble());
       mPeriodicIO.des_chassis_speeds = mMotionPlanner.update(mPeriodicIO.robot_pose, mPeriodicIO.timestamp);
     } 
     writePeriodicOutputs();
+
 
    
   }

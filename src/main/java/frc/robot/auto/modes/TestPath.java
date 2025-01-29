@@ -16,7 +16,7 @@ public class TestPath implements IAuto {
     private final Pose2d mStartingPose;
 
     public TestPath () {
-        mTestPath = AutoTrajectoryReader.generateTrajectoryFromFile("paths/TestPath.path", Constants.createTrajConfig(4, 4)); 
+        mTestPath = AutoTrajectoryReader.generateTrajectoryFromFile("paths/test.path", Constants.createTrajConfig(4, 4)); 
         mStartingPose = new Pose2d(mTestPath.getInitialPose().getTranslation(), Rotation2d.fromDegrees(Telemetry.isRedAlliance() ? 180 : 0)); 
     }
 
