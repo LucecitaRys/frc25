@@ -123,5 +123,6 @@ public final class Constants {
          public static final int id_mp = 1;
          public static final int id_er = 0;
          public static final int id_el = 0;
+         public static final int id_mb =0;
       }
 }
