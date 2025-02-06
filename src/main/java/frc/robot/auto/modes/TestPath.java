@@ -4,14 +4,14 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Telemetry;
 import frc.robot.auto.AutoTrajectoryReader;
 import frc.robot.auto.IAuto;
 import frc.robot.commands.FollowPath;
-import frc.robot.commands.ShooAuto;
+
 
 public class TestPath implements IAuto {
     private final Trajectory mTestPath,mTest2, mTest3, mTest4; 

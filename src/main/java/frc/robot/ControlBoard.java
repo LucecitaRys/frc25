@@ -9,6 +9,7 @@ public class ControlBoard {
     public static final XboxController driver = new XboxController(0); 
     public static final XboxController operator = new XboxController(1); 
 
+
     public static DoubleSupplier getLeftYC0 () {
         return () -> MathUtil.applyDeadband(-driver.getLeftY(), 0.2); 
        
@@ -29,11 +30,28 @@ public class ControlBoard {
         return MathUtil.applyDeadband(-operator.getRightY(), 0.2); 
     }
     public static boolean buttonA (){
-        return operator.getAButton(); 
+        return operator.getAButtonPressed(); 
     }
     public static boolean buttonB(){
-        return operator.getBButton(); 
+        return operator.getBButtonPressed(); 
     }
-    
-    
+    public static boolean buttonx (){
+        return operator.getXButtonPressed(); 
+    }
+    public static boolean buttony(){
+        return operator.getYButtonPressed(); 
+    }
+    public static Boolean button5(){
+        return operator.getRightBumperButtonPressed();
+    }
+    public static Boolean ButtonCOLLECT(){
+        return operator.getLeftBumperButtonReleased();
+    }
+    public static Boolean ButtonCORAL(){
+        return operator.getBackButtonPressed();
+    }
+    public static Boolean ButtonALGAE(){
+        return operator.getStartButtonPressed();
+    }
 }
+   

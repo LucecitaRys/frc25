@@ -17,12 +17,11 @@ import edu.wpi.first.math.geometry.Twist2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.measure.Angle;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.lib.Conversions;
+
 import frc.lib.swerve.DriveMotionPlanner;
 import frc.lib.swerve.ModuleState;
 import frc.lib.swerve.SwerveDriveKinematics;

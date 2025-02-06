@@ -12,7 +12,7 @@ public class Vision extends SubsystemBase{
     private static Vision mVision;
     private final NetworkTable table;
     public Vision (){
-table = NetworkTableInstance.getDefault().getTable(getName());
+table= NetworkTableInstance.getDefault().getTable(getName());
     }
     @Override
     public void periodic (){
@@ -41,7 +41,7 @@ public static Vision getInstance (){
     return mVision;
   }
 
-//publicar en smart dashboard periódicamen
+
 
 
 }
