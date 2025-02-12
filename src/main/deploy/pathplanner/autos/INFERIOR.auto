@@ -1,0 +1,49 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "INF4"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

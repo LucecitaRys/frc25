@@ -14,10 +14,12 @@ import frc.robot.commands.FollowPath;
 
 
 
+
 public class autoprueba1 implements IAuto {
     private final Trajectory mpath1, mpath2, mpath3, mpath4; 
     private final Pose2d mStartingPose; 
     private final Command mAutoCommand; 
+
     public autoprueba1 () {
         mpath1 = AutoTrajectoryReader.generateTrajectoryFromFile("pathplanner/paths/test.path", Constants.createTrajConfig(2, 2));
         mpath2 = AutoTrajectoryReader.generateTrajectoryFromFile("pathplanner/paths/test1.path", Constants.createTrajConfig(2, 2)); 
