@@ -15,6 +15,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class Brazo extends SubsystemBase {
   private static Brazo mBrazo;
   public SparkMax brazom;
@@ -50,7 +51,7 @@ public class Brazo extends SubsystemBase {
         .inverted(false);
 
     config.closedLoop
-        .pidf(0.0, 0.0, 0.0, 0.0, ClosedLoopSlot.kSlot0)
+        .pidf(0.5, 0.5, 0.5, 0.5, ClosedLoopSlot.kSlot0)
         .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
         .velocityFF(1.0 / 5767, ClosedLoopSlot.kSlot1)
         .outputRange(-1, 1, ClosedLoopSlot.kSlot1);
@@ -83,6 +84,9 @@ public class Brazo extends SubsystemBase {
     }
     return mBrazo;
   }
+  public void setBrazoStates (brazoposes BrazoStates) {
+      if (brStates != BrazoStates) {brStates = BrazoStates; }
+    }
 
   public void setposBra() {
     posDrive = mDrive.GetH();

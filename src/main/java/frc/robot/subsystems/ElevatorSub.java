@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.StatusSignal;
+
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
@@ -8,15 +8,16 @@ import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.PositionDutyCycle;
+
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.ControlModeValue;
+
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
 
 public class ElevatorSub extends SubsystemBase {
     private static ElevatorSub mElevatorSub;
@@ -53,12 +54,12 @@ slot0Configs.kV = 0;
 
 // Configuración de Límites de Corriente
 CurrentLimitsConfigs currentLimitsConfigs = new CurrentLimitsConfigs();
-currentLimitsConfigs.SupplyCurrentLowerLimit = 0;
-currentLimitsConfigs.SupplyCurrentLowerTime = 0;
-currentLimitsConfigs.SupplyCurrentLimit = 0;
+currentLimitsConfigs.SupplyCurrentLowerLimit = 0.45;
+currentLimitsConfigs.SupplyCurrentLowerTime = 0.12;
+currentLimitsConfigs.SupplyCurrentLimit = 0.5;
 currentLimitsConfigs.SupplyCurrentLimitEnable = true;
 currentLimitsConfigs.StatorCurrentLimitEnable = true;
-currentLimitsConfigs.StatorCurrentLimit = 0;
+currentLimitsConfigs.StatorCurrentLimit = 0.5;
 
 FeedbackConfigs feedbackConfigs = new FeedbackConfigs(); 
   feedbackConfigs.FeedbackRemoteSensorID = 0;
@@ -111,6 +112,9 @@ SmartDashboard.putNumber("position", pos);
   public  double getPosEle(){
     return ElevatorR.getPosition().getValueAsDouble();
   }
+  public void setElevatorPoses (ElePoses elevadoStates) {
+      if (ElPos != elevadoStates) {ElPos = elevadoStates; }
+    }
 
     public static ElevatorSub getInstance (){
       if (mElevatorSub== null){

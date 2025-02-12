@@ -2,15 +2,15 @@ package frc.robot;
 
 import java.util.Optional;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.epilogue.logging.errors.ErrorHandler;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.Drive.DriveControlMode;
-import frc.robot.auto.IAuto;
 
+import frc.robot.auto.IAuto;
+import frc.robot.commands.ModeAlgae;
+import frc.robot.commands.ModeCorall;
 import frc.robot.subsystems.Brazo;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ElevatorSub;
@@ -33,7 +33,12 @@ public class Robot extends TimedRobot {
   // private Climber mClimber;
   private Optional<IAuto> mAutoMode = Optional.empty();
   private Command mAutonomousCommand;
+  private final  Shooter shooterSubsystem  = Shooter.getInstance();
+  private final  Brazo BrazoSub  = Brazo.getInstance();
+  private final  ElevatorSub ElevatorSubsytem  = ElevatorSub.getInstance();
 
+  private final ModeCorall CoralCommand = new ModeCorall(); 
+  private final ModeAlgae AlgaeCommand = new ModeAlgae(); 
 
   @Override
   public void robotInit() {
@@ -46,6 +51,15 @@ public class Robot extends TimedRobot {
     // mShooter = Shooter.getInstance();
     // mClimber = Climber.getInstance();
     // CameraServer.startAutomaticCapture("camera", 0);
+    shooterSubsystem.setDefaultCommand(CoralCommand); 
+    shooterSubsystem.setDefaultCommand(AlgaeCommand);
+    ElevatorSubsytem.setDefaultCommand(CoralCommand); 
+    ElevatorSubsytem.setDefaultCommand(AlgaeCommand);
+    BrazoSub.setDefaultCommand(CoralCommand); 
+    BrazoSub.setDefaultCommand(AlgaeCommand);
+
+
+
     
   }
 
@@ -104,60 +118,8 @@ public class Robot extends TimedRobot {
     if (ControlBoard.driver.getPOV() != -1) { 
       mDrive.setHeadingControl(Rotation2d.fromDegrees(ControlBoard.driver.getPOV())); 
     } 
-    
-    if(ControlBoard.ButtonCORAL()){
-      if (ControlBoard.buttonA()) {
-        mBrazo.brStates = brazoposes.collectCoral;
-        mElevatorSub.ElPos = ElePoses.collect;
-        mShooter.inStates = intake_states.collectCoral;
-      }
-      if (ControlBoard.buttonB()) {
-        mBrazo.brStates = brazoposes.nivel1;
-        mElevatorSub.ElPos = ElePoses.nivel1;
-        mShooter.inStates = intake_states.throwCoral;
-      }
-      if (ControlBoard.buttonx()) {
-        mBrazo.brStates = brazoposes.nivel2;
-        mElevatorSub.ElPos = ElePoses.nivel2;
-        mShooter.inStates = intake_states.throwCoral;
-      }
-      if (ControlBoard.buttony()) {
-        mBrazo.brStates = brazoposes.nivel3;
-        mElevatorSub.ElPos = ElePoses.nivel3;
-        mShooter.inStates = intake_states.throwCoral;
-      }
-      if (ControlBoard.button5()) {
-        mBrazo.brStates = brazoposes.nivel4;
-        mElevatorSub.ElPos = ElePoses.nivel4;
-        mShooter.inStates = intake_states.throwCoral;
-      }
-    }
 
-
-
-    if(ControlBoard.ButtonALGAE()){
-      if (ControlBoard.buttonA()) {
-        mBrazo.brStates = brazoposes.collectAlgae;
-        mElevatorSub.ElPos = ElePoses.collect;
-        mShooter.inStates = intake_states.collectAlgae;
-      }
-      if (ControlBoard.buttonB()) {
-        mBrazo.brStates = brazoposes.nivel1;
-        mElevatorSub.ElPos = ElePoses.nivel1;
-        mShooter.inStates = intake_states.collectAlgae;
-      }
-      if (ControlBoard.buttonx()) {
-        mBrazo.brStates = brazoposes.nivel1;
-        mElevatorSub.ElPos = ElePoses.nivel2;
-        mShooter.inStates = intake_states.collectAlgae;
-      }
-      if (ControlBoard.buttony()) {
-        mBrazo.brStates = brazoposes.nivel3;
-        mElevatorSub.ElPos = ElePoses.nivel3;
-        mShooter.inStates = intake_states.throwAlagae;
-      }
-      
-    }
+   
 
     
   }
