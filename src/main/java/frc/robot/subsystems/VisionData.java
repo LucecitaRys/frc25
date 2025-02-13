@@ -1,17 +1,14 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+public class VisionData {
+    public double tx;
+    public double ty;
+    public double area;
 
-public class VisionValues extends SubsystemBase {
-  /** Creates a new VisionValues. */
-  public VisionValues() {}
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    public VisionData(double tx, double ty, double area) {
+        this.tx = tx;
+        this.ty = ty;
+        this.area = area;
+    }
 }
+

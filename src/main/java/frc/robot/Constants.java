@@ -97,13 +97,13 @@ public final class Constants {
         public static final double wheelCircumference = Math.PI * Units.inchesToMeters(4);
 
         //Front Left  por back left
-        public static final SwerveModuleConstants MOD2 = new SwerveModuleConstants(1, 2, 3, 0.094482421875); 
+        public static final SwerveModuleConstants MOD2 = new SwerveModuleConstants(4, 0, 6, 0.094482421875); 
         //Front Right 
-        public static final SwerveModuleConstants MOD1 = new SwerveModuleConstants(4, 5, 6, 0.123779296875); 
+        public static final SwerveModuleConstants MOD1 = new SwerveModuleConstants(5, 6, 9, 0.123779296875); 
         //Back Left  por front left 
-        public static final SwerveModuleConstants MOD0 = new SwerveModuleConstants(7, 8, 9, 0.2392578125); 
+        public static final SwerveModuleConstants MOD0 = new SwerveModuleConstants(1, 2, 3, 0.2392578125); 
         //Back Right 
-        public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(10, 11, 12, -0.002197265625); 
+        public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(8, 7, 12, -0.002197265625); 
 
         public static double steer_kP = 2;
         public static double steer_kI = 0; 
@@ -118,12 +118,9 @@ public final class Constants {
     }
     public static final class MotorConstants {
         public static final int id_ms= 20; 
-         public static final int id_mi= 17; 
-         public static final int id_mc = 0;
-         public static final int id_mp = 1;
+         public static final int id_mi= 27; 
          public static final int id_er = 0;
-         public static final int id_el = 0;
-         public static final int id_mb =0;
+         public static final int id_mb =40;
       }
       
 }

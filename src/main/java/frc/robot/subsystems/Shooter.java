@@ -50,7 +50,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     
 
-    Muneca = new SparkMax(0, MotorType.kBrushless);
+    Muneca = new SparkMax(24, MotorType.kBrushless);
     
     motIk = new TalonFX(Constants.MotorConstants.id_mi);
    

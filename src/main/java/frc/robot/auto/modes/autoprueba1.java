@@ -11,6 +11,8 @@ import frc.robot.auto.AutoTrajectoryReader;
 import frc.robot.auto.IAuto;
 
 import frc.robot.commands.FollowPath;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Shooter.intake_states;
 
 
 
@@ -19,6 +21,7 @@ public class autoprueba1 implements IAuto {
     private final Trajectory mpath1, mpath2, mpath3, mpath4; 
     private final Pose2d mStartingPose; 
     private final Command mAutoCommand; 
+    private final Shooter mShooter = Shooter.getInstance();
 
     public autoprueba1 () {
         mpath1 = AutoTrajectoryReader.generateTrajectoryFromFile("pathplanner/paths/test.path", Constants.createTrajConfig(2, 2));
@@ -33,6 +36,7 @@ public class autoprueba1 implements IAuto {
                     new FollowPath(mpath1, Rotation2d.fromDegrees(0)),
                     new FollowPath(mpath2, Rotation2d.fromDegrees(0))
                 )
+               
             ),
           
             new ParallelCommandGroup(

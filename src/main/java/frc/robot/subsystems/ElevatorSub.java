@@ -13,7 +13,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,6 +22,8 @@ import frc.robot.Constants;
 public class ElevatorSub extends SubsystemBase {
     private static ElevatorSub mElevatorSub;
     private final TalonFX ElevatorR;
+  // private Encoder encoder;
+
     public double posel;
    // private final TalonFX ElevatorL;
   private TalonFXConfiguration motorConf = new TalonFXConfiguration();
@@ -40,6 +42,7 @@ public class ElevatorSub extends SubsystemBase {
 
   public ElevatorSub() {
 
+   // encoder = new Encoder(null, null);
 ElevatorR= new TalonFX(Constants.MotorConstants.id_er);
 //ElevatorL = new TalonFX(Constants.MotorConstants.id_el);
 //ElevatorL.setControl(new Follower(Constants.MotorConstants.id_er, false));
@@ -122,6 +125,10 @@ SmartDashboard.putNumber("position", pos);
       }
       return mElevatorSub;
     }
+//public double GestPosEle(){
+// return encoder.getDistance();
+//}
+
   
     public void setposEl(){
       switch (ElPos) {
@@ -133,7 +140,7 @@ SmartDashboard.putNumber("position", pos);
           case collect:
           setPosElevator(0);          
           posel= 0;
-          break;
+          break; 
           case nivel1:
           setPosElevator(0);
           posel= 0;
@@ -163,5 +170,7 @@ SmartDashboard.putNumber("position", pos);
           break;
         }
       }
+
+  
 
 }
