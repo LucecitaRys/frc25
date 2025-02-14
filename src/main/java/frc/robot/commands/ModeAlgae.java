@@ -27,7 +27,9 @@ public class ModeAlgae extends Command {
   private boolean mFlag;
  
   public ModeAlgae() {
-addRequirements(mBrazo, mElevador,mElevador);
+addRequirements(mBrazo);
+addRequirements(mElevador);
+addRequirements(mShooter);
   } 
 
   // Called when the command is initially scheduled.

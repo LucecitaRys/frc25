@@ -45,13 +45,13 @@ mShooter = Shooter.getInstance();
 mBrazo = Brazo.getInstance();
 mElevatorSub = ElevatorSub.getInstance();
 
-    // mIntake = Intake.getInstance()
+   
    Command groupCommand = new SequentialCommandGroup(
         new ModeCorall(), // CoralCommand
         new ModeAlgae()   // AlgaeCommand
     );
 
-    // Asigna el grupo de comandos a cada subsistema
+    
     mShooter.setDefaultCommand(groupCommand);
     mElevatorSub.setDefaultCommand(groupCommand);
     mBrazo.setDefaultCommand(groupCommand);

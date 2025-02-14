@@ -10,8 +10,8 @@ public final class Constants {
     public static double kLooperDt = 0.02; 
 
     public static class Field {
-        public static final double length = 16.54; 
-        public static final double width = 8.21; 
+        public static final double length = 17.55; 
+        public static final double width = 8.05; 
     }
 
     public enum StatusAction {
@@ -20,33 +20,7 @@ public final class Constants {
         Undefined
     }
 
-    public static class Climber {
-        public static final int id_right_tel = 18; 
-        public static final int id_left_tel = 19; 
-
-        public static final double kp = 0.1; 
-        public static final double ki = 0; 
-        public static final double kd = 0; 
-        public static final double kFF = 0; 
-    }
-
-    public static class Shooter {
-        public static final int id_top = 16; 
-        public static final int id_down = 17; 
-
-        public static final double kp = 0.025; 
-        public static final double ki = 0; 
-        public static final double kd = 0; 
-        public static final double ks = 0; 
-
-    }
-
-    public static class Intake {
-        public static final int id_intake = 14; 
-        public static final int id_rollers = 15; 
-
-        public static final double ratio_intake_roller = 5/(32/14); 
-    }
+    
 
     public static TrajectoryConfig createTrajConfig (double maxVel, double maxAccel) {
         TrajectoryConfig config = new TrajectoryConfig(maxVel, maxAccel);
@@ -57,8 +31,8 @@ public final class Constants {
 
     public static class Drive {
         public static final int id_pigeon = 13;
-        public static final double track_width = Units.inchesToMeters(19.5); //19.5in 28
-        public static final double wheel_base = Units.inchesToMeters(21.5); //21.5in 31.5
+        public static final double track_width = Units.inchesToMeters(21.75); //19.5 in 28
+        public static final double wheel_base = Units.inchesToMeters(23.75); //21.5in 31.5
 
         public enum DriveControlMode {
             Velocity,
@@ -92,22 +66,22 @@ public final class Constants {
     }
 
     public static class SwerveModules {
-        public static final double steering_gear_ratio = 12.8; 
-        public static final double drive_gear_ratio = 6.75;
+        public static final double steering_gear_ratio = 18.75; 
+        public static final double drive_gear_ratio = 5.36;
         public static final double wheelCircumference = Math.PI * Units.inchesToMeters(4);
 
         //Front Left  por back left
-        public static final SwerveModuleConstants MOD2 = new SwerveModuleConstants(4, 0, 6, 0.094482421875); 
+        public static final SwerveModuleConstants MOD2 = new SwerveModuleConstants(4, 0, 6, -0.47705078125); 
         //Front Right 
-        public static final SwerveModuleConstants MOD1 = new SwerveModuleConstants(5, 6, 9, 0.123779296875); 
+        public static final SwerveModuleConstants MOD1 = new SwerveModuleConstants(5, 6, 9, 0.48828125); 
         //Back Left  por front left 
-        public static final SwerveModuleConstants MOD0 = new SwerveModuleConstants(1, 2, 3, 0.2392578125); 
+        public static final SwerveModuleConstants MOD0 = new SwerveModuleConstants(1, 2, 3, 0.450439453125); 
         //Back Right 
-        public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(8, 7, 12, -0.002197265625); 
+        public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(8, 7, 12, -0.499755859375); 
 
-        public static double steer_kP = 2;
-        public static double steer_kI = 0; 
-        public static double steer_kD = 0;
+        public static double steer_kP = 2; //2
+        public static double steer_kI = 0.14; 
+        public static double steer_kD = 0  ; //0
         public static double steer_kS = 0; 
         
         public static double drive_kP = 0.00023; 

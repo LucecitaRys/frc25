@@ -29,7 +29,9 @@ public class ModeCorall extends Command {
   private boolean mFlag;
  
   public ModeCorall() {
-addRequirements(mBrazo, mElevador,mElevador);
+addRequirements(mBrazo);
+addRequirements(mElevador);
+addRequirements(mShooter);
   } 
 
   // Called when the command is initially scheduled.
