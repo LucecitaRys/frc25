@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.auto.IAuto;
 import frc.robot.commands.ModeAlgae;
 import frc.robot.commands.ModeCorall;
+import frc.robot.commands.PRUEBAS;
 import frc.robot.subsystems.Brazo;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ElevatorSub;
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   private Drive mDrive;
 private Shooter mShooter;
 private Brazo mBrazo;
+private final PRUEBAS pruebas= new PRUEBAS();
 private ElevatorSub mElevatorSub;
   private Vision mVision;
   private Optional<IAuto> mAutoMode = Optional.empty();
@@ -56,7 +58,9 @@ mElevatorSub = ElevatorSub.getInstance();
     mElevatorSub.setDefaultCommand(groupCommand);
     mBrazo.setDefaultCommand(groupCommand);
 
-
+    mShooter.setDefaultCommand(pruebas);
+    mElevatorSub.setDefaultCommand(pruebas);
+    mBrazo.setDefaultCommand(pruebas);
 
 
     

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.auto.IAuto;
+import frc.robot.auto.modes.INFERIOR;
+import frc.robot.auto.modes.SUPERIOR;
 //import frc.robot.auto.modes.SideNote;
 import frc.robot.auto.modes.TestPath;
 //import frc.robot.auto.modes.TwoClosestNotes;
@@ -18,8 +20,8 @@ public class Telemetry {
     public enum AutoMode {
         DO_NOTHING,
         TEST_PATH, 
-        TWO_NOTES,
-        SIDE_NOTE
+        INFERIOR,
+        SUPERIOR
     }
     private SendableChooser<Alliance> mAllianceChooser = new SendableChooser<>(); 
     private static boolean isRedAlliance = false; 
@@ -27,15 +29,18 @@ public class Telemetry {
     private AutoMode mCachedDesiredMode = AutoMode.DO_NOTHING; 
     private Optional<IAuto> mAutoMode = Optional.empty(); 
     
+    
     public Telemetry () {
         mAllianceChooser.setDefaultOption("BLUE", Alliance.Blue);
         mAllianceChooser.addOption("RED", Alliance.Red);
         mDriverTab.add("ALLIANCE", mAllianceChooser).withPosition(7, 0); 
         mAutoChooser.setDefaultOption("DO NOTHING", AutoMode.DO_NOTHING);
-        mAutoChooser.addOption("TWO NOTES", AutoMode.TWO_NOTES); 
-        mAutoChooser.addOption("SIDE NOTE", AutoMode.SIDE_NOTE);
+        mAutoChooser.addOption("Superior", AutoMode.SUPERIOR); 
+        mAutoChooser.addOption("Inferior", AutoMode.INFERIOR);
         mAutoChooser.addOption("TEST PATH", AutoMode.TEST_PATH); 
         mDriverTab.add("AUTO MODE", mAutoChooser).withPosition(8, 0).withSize(2, 1); 
+
+        
     }
 
     public void updateAutoModeCreator () {
@@ -62,10 +67,10 @@ public class Telemetry {
                 return Optional.empty();
             case TEST_PATH: 
                 return Optional.of(new TestPath()); 
-            /*case TWO_NOTES: 
-                return Optional.of(new TwoClosestNotes()); 
-            case SIDE_NOTE: 
-                return Optional.of(new SideNote()); */
+            case INFERIOR: 
+                return Optional.of(new INFERIOR()); 
+            case SUPERIOR: 
+                return Optional.of(new SUPERIOR()); 
             default: 
                 return Optional.empty(); 
         }

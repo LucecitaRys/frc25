@@ -70,24 +70,28 @@ public final class Constants {
         public static final double drive_gear_ratio = 5.36;
         public static final double wheelCircumference = Math.PI * Units.inchesToMeters(4);
 
-        //Front Left  por back left
+        //Front Left  por   back left
         public static final SwerveModuleConstants MOD2 = new SwerveModuleConstants(4, 0, 6, -0.47705078125); 
         //Front Right 
         public static final SwerveModuleConstants MOD1 = new SwerveModuleConstants(5, 6, 9, 0.48828125); 
-        //Back Left  por front left 
+        //Back Left  por                                       front left 
         public static final SwerveModuleConstants MOD0 = new SwerveModuleConstants(1, 2, 3, 0.450439453125); 
         //Back Right 
         public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(8, 7, 12, -0.499755859375); 
 
-        public static double steer_kP = 2; //2
-        public static double steer_kI = 0.14; 
-        public static double steer_kD = 0  ; //0
+        public static double steer_kP = 2 ; //2
+        public static double steer_kI = 0; 
+        public static double steer_kD = 1;//0
         public static double steer_kS = 0; 
+       
         
-        public static double drive_kP = 0.00023; 
+        public static double drive_kP = 0.1; 
         public static double drive_kI = 0; 
         public static double drive_kD = 0; 
         public static double drive_kS = 0;
+       
+       
+        
 
     }
     public static final class MotorConstants {

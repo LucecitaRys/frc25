@@ -12,6 +12,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -88,10 +89,17 @@ public class Brazo extends SubsystemBase {
       if (brStates != BrazoStates) {brStates = BrazoStates; }
     }
 
+  public void getposbrazo (double BrazPo){
+    brazom.set(BrazPo);
+  
+  }
+
   public void setposBra() {
     posDrive = mDrive.GetH();
-    if (posDrive > 0 && posDrive<= 1 ){
+    SmartDashboard.putNumber("POSICIONDRIVE", posDrive);
+    if (posDrive > 0 && posDrive< Math.PI ){
         sentido= 1;
+      
       }
     else{
         sentido = -1; 

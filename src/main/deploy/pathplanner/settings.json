@@ -3,10 +3,10 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "SUPERIOR",
-    "New New Folder",
+    "inferior",
     "New New New Folder",
-    "New New New New Folder"
+    "New New New New Folder",
+    "SUPERIOR"
   ],
   "autoFolders": [],
   "defaultMaxVel": 4.0,

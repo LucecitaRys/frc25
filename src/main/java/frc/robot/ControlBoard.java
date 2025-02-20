@@ -23,10 +23,10 @@ public class ControlBoard {
         return () -> MathUtil.applyDeadband(-driver.getRightX(), 0.2); 
     }
 
-    public static double getLeftY_0 (){
+    public static double getLeftY_ope (){
         return MathUtil.applyDeadband(-operator.getLeftY(), 0.2); 
     }
-    public static double getRightY_0 (){
+    public static double getRightY_ope (){
         return MathUtil.applyDeadband(-operator.getRightY(), 0.2); 
     }
     public static boolean buttonA (){
@@ -53,5 +53,12 @@ public class ControlBoard {
     public static Boolean ButtonALGAE(){
         return operator.getStartButtonPressed();
     }
+    public static Double ButtonMuL(){
+        return operator.getLeftTriggerAxis();
+    }
+    public static Double ButtonMuR(){
+        return -operator.getRightTriggerAxis();
+    }
+    
 }
    

@@ -105,10 +105,13 @@ FeedbackConfigs feedbackConfigs = new FeedbackConfigs();
 
     }
 // metodo
+public void GETPOSESELEVATOR(double ELEPO ) {
+  ElevatorR.setPosition(ELEPO);
+  
+    }
 
 public void setPosElevator(double pos ) {
 ElevatorR.setPosition(pos);
-
 SmartDashboard.putNumber("position", pos);
 
   }

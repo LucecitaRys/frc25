@@ -110,6 +110,9 @@ public class Shooter extends SubsystemBase {
   public void posMuneca(int posmun){
       closedLoopController.setReference(posmun, ControlType.kPosition, ClosedLoopSlot.kSlot0);       
   }
+  public void GETPOSESMU(double MUPO){
+Muneca.set(MUPO);
+  }
   public double getposm(){
    return  absoluteEncoderm.getPosition();
   }
@@ -133,7 +136,6 @@ public class Shooter extends SubsystemBase {
       case none:
       posMuneca(0);
         posm= 0;
-
         break;
         case collectAlgae:
         posMuneca(0);        

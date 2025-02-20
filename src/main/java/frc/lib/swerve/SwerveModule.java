@@ -36,7 +36,8 @@ public class SwerveModule {
     private final int moduleNumber;
     private final TalonFX mSteerMotor, mDriveMotor;
     private final CANcoder mCANcoder; 
-    
+   
+
     private PeriodicIO mPeriodicIO = new PeriodicIO(); 
     private ModuleState targetModuleState; 
     
@@ -52,15 +53,40 @@ public class SwerveModule {
         closedLoopConfigs.ContinuousWrap = true; 
         TalonFXConfiguration steer_config = new TalonFXConfiguration();
         steer_config.ClosedLoopGeneral = closedLoopConfigs;
-        steer_config.CurrentLimits = new CurrentLimitsConfigs().withSupplyCurrentLimit(45).withSupplyCurrentLowerLimit(50).withSupplyCurrentLowerTime(0.1).withSupplyCurrentLimitEnable(true);
-        steer_config.Feedback = new FeedbackConfigs().withFeedbackRemoteSensorID(mCANcoder.getDeviceID()).withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder).withRotorToSensorRatio(SwerveModules.steering_gear_ratio);
-        steer_config.Slot0 = new Slot0Configs().withKP(SwerveModules.steer_kP).withKI(SwerveModules.steer_kI).withKD(SwerveModules.steer_kD).withKS(SwerveModules.steer_kS); 
+        steer_config.CurrentLimits = new CurrentLimitsConfigs()
+        .withSupplyCurrentLimit(45)
+        .withSupplyCurrentLowerLimit(50)
+        .withSupplyCurrentLowerTime(0.1)
+        .withSupplyCurrentLimitEnable(true);
+
+        steer_config.Feedback = new FeedbackConfigs()
+        .withFeedbackRemoteSensorID(mCANcoder.getDeviceID())
+        .withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder)
+        .withRotorToSensorRatio(SwerveModules.steering_gear_ratio);
+
+        steer_config.Slot0 = new Slot0Configs()
+        .withKP(SwerveModules.steer_kP)
+        .withKI(SwerveModules.steer_kI)
+        .withKD(SwerveModules.steer_kD)
+        .withKS(SwerveModules.steer_kS);
         mSteerMotor.getConfigurator().apply(steer_config); 
         //DriveMotor Config
         TalonFXConfiguration drive_config = new TalonFXConfiguration(); 
-        drive_config.CurrentLimits = new CurrentLimitsConfigs().withSupplyCurrentLimit(50).withSupplyCurrentLowerLimit(70).withSupplyCurrentLowerTime(0.1).withSupplyCurrentLimitEnable(true); 
-        drive_config.Feedback = new FeedbackConfigs().withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor).withSensorToMechanismRatio(SwerveModules.drive_gear_ratio); 
-        drive_config.Slot0 = new Slot0Configs().withKP(SwerveModules.drive_kP).withKI(SwerveModules.drive_kI).withKD(SwerveModules.drive_kD).withKS(SwerveModules.drive_kS); 
+        drive_config.CurrentLimits = new CurrentLimitsConfigs()
+        .withSupplyCurrentLimit(50)
+        .withSupplyCurrentLowerLimit(70)
+        .withSupplyCurrentLowerTime(0.1)
+        .withSupplyCurrentLimitEnable(true); 
+        drive_config.Feedback = new FeedbackConfigs()
+        .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
+        .withSensorToMechanismRatio(SwerveModules.drive_gear_ratio); 
+        
+        drive_config.Slot0 = new Slot0Configs()
+        .withKP(SwerveModules.drive_kP)
+        .withKI(SwerveModules.drive_kI)
+        .withKD(SwerveModules.drive_kD)
+        .withKS(SwerveModules.drive_kS);
+         
         mDriveMotor.getConfigurator().apply(drive_config); 
         //CANcoder Config
         CANcoderConfiguration cancoderConfigs = new CANcoderConfiguration();
@@ -116,25 +142,16 @@ public class SwerveModule {
         if (targetModuleState == null) {
             return;
         }
-      
-       SwerveModuleState moduleStateOptimized = SwerveModuleState.optimize(
-        new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle), 
-        Rotation2d.fromRotations(mPeriodicIO.currentAngle)
-       );
-
-       // SwerveModuleState moduleStateOptimized = new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle);
-       // Rotation2d.fromRotations(mPeriodicIO.currentAngle);
-        
-
-      //  SwerveModuleState moduleStateOptimized =  new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle), Rotation2d.fromRotations(mPeriodicIO.currentAngle);
-        
+        SwerveModuleState moduleStateOptimized = SwerveModuleState.optimize(
+            new SwerveModuleState(targetModuleState.speedMetersPerSecond, targetModuleState.angle), 
+            Rotation2d.fromRotations(mPeriodicIO.currentAngle)
+        ); 
 
      
-        double targetVelocity = moduleStateOptimized.speedMetersPerSecond; 
+      double targetVelocity = moduleStateOptimized.speedMetersPerSecond; 
         Rotation2d targetAngleRot = moduleStateOptimized.angle; 
         mPeriodicIO.rotationDemand = targetAngleRot.getRotations(); 
         mSteerMotor.setControl(new PositionDutyCycle(mPeriodicIO.rotationDemand)); 
-        
         if (mPeriodicIO.controlMode == DriveControlMode.Velocity){
             mPeriodicIO.driveDemand = Conversions.MPSToRPS(targetVelocity, SwerveModules.wheelCircumference, SwerveModules.drive_gear_ratio)*60; 
             mDriveMotor.setControl(new VelocityDutyCycle(mPeriodicIO.driveDemand)); 
