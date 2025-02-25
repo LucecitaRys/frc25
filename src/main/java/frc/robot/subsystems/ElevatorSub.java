@@ -23,8 +23,7 @@ import frc.robot.Constants;
 public class ElevatorSub extends SubsystemBase {
     private static ElevatorSub mElevatorSub;
     private final TalonFX ElevatorR;
-      public RelativeEncoder encoderE;
-      public Encoder Encoderele= new Encoder(1, 1);
+      public Encoder Encoderele= new Encoder(1, 0);
    
 
   // private Encoder encoder;
@@ -104,7 +103,6 @@ FeedbackConfigs feedbackConfigs = new FeedbackConfigs();
 
   ElevatorR.getConfigurator().apply(motorConf); 
   //ElevatorL.getConfigurator().apply(motorConf); 
-SmartDashboard.putNumber("EncoderEle", encoderE.getPosition());
 
 Encoderele.setDistancePerPulse(1);
 

@@ -31,7 +31,7 @@ public final class Constants {
     }
 
     public static class Drive {
-        public static final int id_pigeon = 13;
+        public static final int id_pigeon = 30;
         public static final double track_width = Units.inchesToMeters(21.75); //19.5 in 28
         public static final double wheel_base = Units.inchesToMeters(23.75); //21.5in 31.5
 
@@ -96,10 +96,10 @@ public final class Constants {
 
     }
     public static final class MotorConstants {
-        public static final int id_ms= 20; 
-         public static final int id_mi= 27; 
+        public static final int id_ms= 31; 
+         public static final int id_mi= 17; 
          public static final int id_er = 0;
-         public static final int id_mb =40;
+         public static final int id_mb =21;
          public static final int id_cl=30;
       }
       

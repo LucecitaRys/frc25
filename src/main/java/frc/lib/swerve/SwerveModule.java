@@ -46,7 +46,7 @@ public class SwerveModule {
         this.moduleNumber = moduleNumber; 
         mSteerMotor = new TalonFX(moduleConstants.steerMotorID, "canivore"); 
         mDriveMotor = new TalonFX(moduleConstants.driveMotorID, "canivore");
-        mCANcoder = new CANcoder(moduleConstants.cancoderID, "Canivore") ; 
+        mCANcoder = new CANcoder(moduleConstants.cancoderID, "canivore") ; 
         
         //SteerMotor Config
         ClosedLoopGeneralConfigs closedLoopConfigs = new ClosedLoopGeneralConfigs(); 

@@ -25,7 +25,7 @@ public class Brazo extends SubsystemBase {
   private static Brazo mBrazo;
   public SparkMax brazom;
   public SparkClosedLoopController closedLoopController;
-  public Encoder EncoderBra= new Encoder(1, 1);
+  public Encoder EncoderBra= new Encoder(3, 2);
 
   public RelativeEncoder encoder;
   
