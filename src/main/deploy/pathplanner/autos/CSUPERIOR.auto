@@ -7,49 +7,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SUP1"
+            "pathName": "CSup1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP2"
+            "pathName": "Csup2"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP3"
+            "pathName": "Csup3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP4"
+            "pathName": "Csup4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Sup5"
+            "pathName": "Csup3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Sup6"
+            "pathName": "Csup4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SUP4"
+            "pathName": "Csup3"
           }
         }
       ]

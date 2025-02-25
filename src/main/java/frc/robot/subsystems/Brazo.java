@@ -1,17 +1,21 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
-import com.revrobotics.spark.SparkAbsoluteEncoder;
+
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+
 import com.revrobotics.spark.config.LimitSwitchConfig.Type;
+
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,7 +25,10 @@ public class Brazo extends SubsystemBase {
   private static Brazo mBrazo;
   public SparkMax brazom;
   public SparkClosedLoopController closedLoopController;
-  public SparkAbsoluteEncoder absoluteEncoder;
+  public Encoder EncoderBra= new Encoder(1, 1);
+
+  public RelativeEncoder encoder;
+  
   public Drive mDrive;
   double posDrive;
   int sentido;
@@ -46,29 +53,38 @@ public class Brazo extends SubsystemBase {
     brStates = brazoposes.none;
     brazom = new SparkMax(Constants.MotorConstants.id_mb, MotorType.kBrushless);
     closedLoopController = brazom.getClosedLoopController();
-    absoluteEncoder = brazom.getAbsoluteEncoder();
+   encoder= brazom.getEncoder();
+   
+    
     SparkMaxConfig config = new SparkMaxConfig();
     config
         .inverted(false);
 
     config.closedLoop
-        .pidf(0.5, 0.5, 0.5, 0.5, ClosedLoopSlot.kSlot0)
+        .pidf(SmartDashboard.getNumber("BrazoP", 0), SmartDashboard.getNumber("BrazoI", 0), SmartDashboard.getNumber("BrazoD", 0),SmartDashboard.getNumber("BrazoF", 0), ClosedLoopSlot.kSlot0)
+       
         .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
         .velocityFF(1.0 / 5767, ClosedLoopSlot.kSlot1)
         .outputRange(-1, 1, ClosedLoopSlot.kSlot1);
-    ;
+    
     config.limitSwitch
         .forwardLimitSwitchType(Type.kNormallyClosed)
         .forwardLimitSwitchEnabled(true)
         .reverseLimitSwitchType(Type.kNormallyOpen)
         .reverseLimitSwitchEnabled(true);
-    config.absoluteEncoder
+    config.encoder
         .positionConversionFactor(1)
-        .zeroOffset(0)
+        
         .velocityConversionFactor(1);
 
     brazom.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
+    EncoderBra.setDistancePerPulse(1);
+    EncoderBra.setReverseDirection(false);
+    // Configures an encoder to average its period measurement over 5 samples
+    // Can be between 1 and 127 samples
+    EncoderBra.setSamplesToAverage(5);
+SmartDashboard.putNumber("EncoderB", encoder.getPosition());
+SmartDashboard.putNumber("EncoderBrazo", EncoderBra.getDistance());
   }
 
   public void setPos(int rev) {
@@ -76,7 +92,7 @@ public class Brazo extends SubsystemBase {
   }
 
   public double getPoseB() {
-    return absoluteEncoder.getPosition();
+    return encoder.getPosition();
   }
 
   public static Brazo getInstance() {

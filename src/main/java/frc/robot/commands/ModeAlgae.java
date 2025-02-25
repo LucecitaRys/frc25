@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.ControlBoard;
 import frc.robot.Constants.Drive;
@@ -64,6 +65,7 @@ addRequirements(mShooter);
         mElevador.ElPos = ElePoses.nivel3;
         mShooter.inStates = intake_states.throwAlagae;
         Shuffleboard.addEventMarker("Algae333333", EventImportance.kHigh);
+       
       }
       
     }
@@ -75,7 +77,7 @@ addRequirements(mShooter);
         mShooter.setConstantVel(0.5);
       
         if(mShooter.CurrentL()>= 0.32) {
-        mShooter.setConstantVel(0);
+        mShooter.setConstantVel(0.2);
         mFlag= true;
       }
       }

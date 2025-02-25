@@ -48,15 +48,15 @@ mBrazo = Brazo.getInstance();
 mElevatorSub = ElevatorSub.getInstance();
 
    
-   Command groupCommand = new SequentialCommandGroup(
-        new ModeCorall(), // CoralCommand
-        new ModeAlgae()   // AlgaeCommand
-    );
+   //Command groupCommand = new SequentialCommandGroup(
+   //     new ModeCorall(), // CoralCommand
+    //    new ModeAlgae()   // AlgaeCommand
+    //);
 
     
-    mShooter.setDefaultCommand(groupCommand);
-    mElevatorSub.setDefaultCommand(groupCommand);
-    mBrazo.setDefaultCommand(groupCommand);
+    //mShooter.setDefaultCommand(groupCommand);
+    //mElevatorSub.setDefaultCommand(groupCommand);
+    //mBrazo.setDefaultCommand(groupCommand);
 
     mShooter.setDefaultCommand(pruebas);
     mElevatorSub.setDefaultCommand(pruebas);

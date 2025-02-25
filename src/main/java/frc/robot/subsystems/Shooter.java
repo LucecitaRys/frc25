@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkAbsoluteEncoder;
 
@@ -33,6 +34,7 @@ public class Shooter extends SubsystemBase {
     
     private final SparkMax Muneca;
     public int posm;
+    private RelativeEncoder encoder;
  
   private TalonFXConfiguration motorConfSho = new TalonFXConfiguration();
   private SparkClosedLoopController closedLoopController;
@@ -55,8 +57,9 @@ public class Shooter extends SubsystemBase {
     motIk = new TalonFX(Constants.MotorConstants.id_mi);
    
     closedLoopController = Muneca.getClosedLoopController();
+    encoder = Muneca.getEncoder();
+
     
-    absoluteEncoderm = Muneca.getAbsoluteEncoder();
   
 
     SparkMaxConfig configmu = new SparkMaxConfig();
@@ -65,10 +68,13 @@ public class Shooter extends SubsystemBase {
 
     configmu.closedLoop
         .pid(0.5, 0.5, 0.5, ClosedLoopSlot.kSlot0)
-        .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
         .outputRange(-1, 1, ClosedLoopSlot.kSlot0)
         .velocityFF(1.0 / 5767, ClosedLoopSlot.kSlot0);
-
+    
+        configmu.encoder
+        .positionConversionFactor(1)
+        .velocityConversionFactor(1);
     configmu.limitSwitch
         .forwardLimitSwitchType(Type.kNormallyClosed)
         .forwardLimitSwitchEnabled(true)
@@ -108,7 +114,8 @@ public class Shooter extends SubsystemBase {
  return current;
  }
   public void posMuneca(int posmun){
-      closedLoopController.setReference(posmun, ControlType.kPosition, ClosedLoopSlot.kSlot0);       
+      closedLoopController.setReference(posmun, ControlType.kPosition, ClosedLoopSlot.kSlot0);  
+           
   }
   public void GETPOSESMU(double MUPO){
 Muneca.set(MUPO);

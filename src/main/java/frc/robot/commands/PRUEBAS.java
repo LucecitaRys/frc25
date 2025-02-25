@@ -33,7 +33,7 @@ addRequirements(mShooter);
   public void execute() {
     
      mBrazo.getposbrazo(ControlBoard.getLeftY_ope());
-     mElevador.GETPOSESELEVATOR(ControlBoard.getRightY_ope());
+     mElevador.GETPOSESELEVATORPower(ControlBoard.getRightY_ope());
   mShooter.GETPOSESMU(ControlBoard.ButtonMuL());
   mShooter.GETPOSESMU(ControlBoard.ButtonMuR());
   SmartDashboard.putNumber("POSE ELEVATOR", mElevador.getPosEle());

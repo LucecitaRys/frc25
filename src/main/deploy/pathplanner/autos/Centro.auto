@@ -7,49 +7,49 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SUP1"
+            "pathName": "Centro1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP2"
+            "pathName": "Centro2"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP3"
+            "pathName": "centro3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP4"
+            "pathName": "Centro4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Sup5"
+            "pathName": "centro3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Sup6"
+            "pathName": "Centro4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP3"
+            "pathName": "centro3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SUP4"
+            "pathName": "Centro4"
           }
         }
       ]

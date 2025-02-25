@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.swerve.SwerveModule.SwerveModuleConstants;
 
 public final class Constants {
@@ -79,16 +80,16 @@ public final class Constants {
         //Back Right 
         public static final SwerveModuleConstants MOD3 = new SwerveModuleConstants(8, 7, 12, -0.499755859375); 
 
-        public static double steer_kP = 2 ; //2
-        public static double steer_kI = 0; 
-        public static double steer_kD = 1;//0
-        public static double steer_kS = 0; 
+        public static double steer_kP = SmartDashboard.getNumber("SteerP", 0); //2
+        public static double steer_kI = SmartDashboard.getNumber("SteerI", 0);; 
+        public static double steer_kD = SmartDashboard.getNumber("SteerD", 0);;//0
+        public static double steer_kS = SmartDashboard.getNumber("SteerS", 0);; 
        
         
-        public static double drive_kP = 0.1; 
-        public static double drive_kI = 0; 
-        public static double drive_kD = 0; 
-        public static double drive_kS = 0;
+        public static double drive_kP = SmartDashboard.getNumber("DriveP", 0);; //0.1
+        public static double drive_kI = SmartDashboard.getNumber("DriveI", 0);; 
+        public static double drive_kD = SmartDashboard.getNumber("DriveD", 0);; 
+        public static double drive_kS = SmartDashboard.getNumber("DriveS", 0);;
        
        
         
@@ -99,6 +100,7 @@ public final class Constants {
          public static final int id_mi= 27; 
          public static final int id_er = 0;
          public static final int id_mb =40;
+         public static final int id_cl=30;
       }
       
 }

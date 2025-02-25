@@ -1,5 +1,8 @@
-package frc.robot.subsystems;
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
+/* package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -8,9 +11,7 @@ import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-
 import com.ctre.phoenix6.hardware.TalonFX;
-
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.revrobotics.RelativeEncoder;
 
@@ -19,12 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+public class climber extends SubsystemBase {
+  private static ElevatorSub mElevatorSub;
+    private final TalonFX Climberm;
 
-public class ElevatorSub extends SubsystemBase {
-    private static ElevatorSub mElevatorSub;
-    private final TalonFX ElevatorR;
-      public RelativeEncoder encoderE;
-      public Encoder Encoderele= new Encoder(1, 1);
    
 
   // private Encoder encoder;
@@ -45,10 +44,10 @@ public class ElevatorSub extends SubsystemBase {
   }
   public ElePoses ElPos = ElePoses.none;   
 
-  public ElevatorSub() {
+  public climber() {
 
    // encoder = new Encoder(null, null);
-ElevatorR= new TalonFX(Constants.MotorConstants.id_er);
+Climberm= new TalonFX(Constants.MotorConstants.id_cl);
 
 
 // Configuración de Slot (PID)
@@ -102,34 +101,32 @@ FeedbackConfigs feedbackConfigs = new FeedbackConfigs();
 
 
 
-  ElevatorR.getConfigurator().apply(motorConf); 
+  Climberm.getConfigurator().apply(motorConf); 
   //ElevatorL.getConfigurator().apply(motorConf); 
-SmartDashboard.putNumber("EncoderEle", encoderE.getPosition());
-
-Encoderele.setDistancePerPulse(1);
 
 
-Encoderele.setReverseDirection(false);
+
 
 // Configures an encoder to average its period measurement over 5 samples
 // Can be between 1 and 127 samples
-Encoderele.setSamplesToAverage(5);
-SmartDashboard.putNumber("EncoderElevator", Encoderele.getDistance());
+
+
     }
 // metodo
-public void GETPOSESELEVATORPower(double elePower ) {
-  ElevatorR.set(elePower);
+public void GETPOSESELEVATOR(double ELEPO ) {
+  Climberm.setPosition(ELEPO);
   
     }
 
 public void setPosElevator(double pos ) {
-ElevatorR.setPosition(pos);
+Climberm.setPosition(pos);
 SmartDashboard.putNumber("position", pos);
 
   }
-  public  double getPosEle(){
-    return ElevatorR.getPosition().getValueAsDouble();
-  }
+ public void power(double PowerCli){
+  Climberm.set(PowerCli);
+ }
+
   public void setElevatorPoses (ElePoses elevadoStates) {
       if (ElPos != elevadoStates) {ElPos = elevadoStates; }
     }
@@ -185,7 +182,5 @@ SmartDashboard.putNumber("position", pos);
           break;
         }
       }
-
-  
-
 }
+*/

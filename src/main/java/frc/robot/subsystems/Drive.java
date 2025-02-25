@@ -37,7 +37,8 @@ import frc.robot.Constants.Drive.KinematicLimits;
 public class Drive extends SubsystemBase {
   private static Drive mDrive;
   private SwerveModule[] mSwerveModules;
-  private Pigeon2 mPigeon = new Pigeon2(Constants.Drive.id_pigeon) ; 
+  private Pigeon2 mPigeon = new Pigeon2( Constants.Drive.id_pigeon, "canivore"); 
+  
 
   private PeriodicIO mPeriodicIO = new PeriodicIO(); 
   public enum DriveControlState {
